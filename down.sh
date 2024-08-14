@@ -4,10 +4,7 @@ source .env
 
 TMP_DIR=$(cat .tmp_dir)
 
-ssh -q $SERVER << EOF
-docker stop factorio
-docker rm factorio
-EOF
+ssh -q $SERVER "bash -c 'docker stop factorio && docker rm factorio'"
 
 ssh -q $SERVER "rm -rf $TMP_DIR"
 
