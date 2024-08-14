@@ -11,6 +11,8 @@ docker run -d \
   -p 34197:34197/udp \
   -p 27015:27015/tcp \
   -v $TMP_DIR:/factorio \
+  --name factorio \
   --restart=unless-stopped \
   factoriotools/factorio
 EOF
+
