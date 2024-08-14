@@ -21,13 +21,17 @@ CONTAINER_NAME="factorio-$(uuidgen)"
 
 echo $CONTAINER_NAME > .container_name
 
-ssh -q $SERVER "bash -c 'docker run -d \
-  -p $UDP_PORT:34197/udp \
-  -p $TCP_PORT:27015/tcp \
-  -v $TMP_DIR:/factorio \
-  --name $CONTAINER_NAME \
-  --restart=unless-stopped \
-  factoriotools/factorio'"
+ssh -q $SERVER "bash -c '
+  sed -i \"s/\\\"game_password\\\": \\\"\\\"/\\\"game_password\\\": \\\"$GAMEPLAY_PASSWORD\\\"/\" /ruta/al/archivo/server-settings.json && \
+  docker run -d \
+    -p $UDP_PORT:34197/udp \
+    -p $TCP_PORT:27015/tcp \
+    -v $TMP_DIR:/factorio \
+    --name $CONTAINER_NAME \
+    --restart=unless-stopped \
+    factoriotools/factorio
+'"
+
 
 
 echo "Deployment done."
