@@ -15,6 +15,8 @@ echo $TMP_DIR > .tmp_dir
 
 scp $SAVE_PATH$SAVE_FILE $SERVER:$TMP_DIR/saves/
 
+scp player-data.json $SERVER:$TMP_DIR/
+
 CONTAINER_NAME="factorio-$(uuidgen)"
 
 echo $CONTAINER_NAME > .container_name
