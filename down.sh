@@ -15,4 +15,3 @@ docker run -d \
   --restart=unless-stopped \
   factoriotools/factorio
 EOF
-
