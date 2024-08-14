@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -f .active ]; then
+  echo "There is an active deployment. Please run down.sh first."
+  exit 1
+fi
+
+touch .active
+
 source .env
 
 TMP_DIR=$(ssh -q $SERVER "TMP=\$(mktemp -d) && mkdir -p \$TMP/saves && echo \$TMP")
