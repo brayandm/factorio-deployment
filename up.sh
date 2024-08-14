@@ -15,11 +15,15 @@ echo $TMP_DIR > .tmp_dir
 
 scp $SAVE_PATH$SAVE_FILE $SERVER:$TMP_DIR/saves/
 
+CONTAINER_NAME="factorio-$(uuidgen)"
+
+echo $CONTAINER_NAME > .container_name
+
 ssh -q $SERVER "bash -c 'docker run -d \
   -p 34197:34197/udp \
   -p 27015:27015/tcp \
   -v $TMP_DIR:/factorio \
-  --name factorio \
+  --name $CONTAINER_NAME \
   --restart=unless-stopped \
   factoriotools/factorio'"
 

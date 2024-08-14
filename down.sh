@@ -11,10 +11,14 @@ source .env
 
 TMP_DIR=$(cat .tmp_dir)
 
-ssh -q $SERVER "bash -c 'docker stop factorio && docker rm factorio'"
+CONTAINER_NAME=$(cat .container_name)
+
+ssh -q $SERVER "bash -c 'docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME'"
 
 ssh -q $SERVER "rm -rf $TMP_DIR"
 
 rm -f .tmp_dir
+
+rm -f .container_name
 
 echo "Down done."
