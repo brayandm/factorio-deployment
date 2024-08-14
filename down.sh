@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ ! -f .active ]; then
+  echo "There is no active deployment. Please run up.sh first."
+  exit 1
+fi
+
+rm -f .active
+
 source .env
 
 TMP_DIR=$(cat .tmp_dir)
