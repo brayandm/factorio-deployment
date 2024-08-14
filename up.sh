@@ -8,14 +8,13 @@ echo $TMP_DIR > .tmp_dir
 
 scp $SAVE_PATH$SAVE_FILE $SERVER:$TMP_DIR/saves/
 
-ssh -q $SERVER << EOF
-docker run -d \
+ssh -q $SERVER "bash -c 'docker run -d \
   -p 34197:34197/udp \
   -p 27015:27015/tcp \
   -v $TMP_DIR:/factorio \
   --name factorio \
   --restart=unless-stopped \
-  factoriotools/factorio
-EOF
+  factoriotools/factorio'"
+
 
 echo "Deployment done."
