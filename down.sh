@@ -2,16 +2,15 @@
 
 source .env
 
-TMP_DIR=$(ssh -q $SERVER "TMP=\$(mktemp -d) && mkdir -p \$TMP/saves && echo \$TMP")
-
-scp $SAVE_PATH$SAVE_FILE $SERVER:$TMP_DIR/saves/
+TMP_DIR=$(cat .tmp_dir)
 
 ssh -q $SERVER << EOF
-docker run -d \
-  -p 34197:34197/udp \
-  -p 27015:27015/tcp \
-  -v $TMP_DIR:/factorio \
-  --name factorio \
-  --restart=unless-stopped \
-  factoriotools/factorio
+docker stop factorio
+docker rm factorio
 EOF
+
+ssh -q $SERVER "rm -rf $TMP_DIR"
+
+rm -f .tmp_dir
+
+echo "Down done."
