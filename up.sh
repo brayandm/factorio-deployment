@@ -9,13 +9,13 @@ touch .active
 
 source .env
 
-TMP_DIR=$(ssh -q $SERVER "TMP=\$(mktemp -d) && mkdir -p \$TMP/saves && echo \$TMP")
+TMP_DIR=$(ssh -q $SERVER "TMP=\$(mktemp -d) && mkdir -p \$TMP/saves && mkdir -p \$TMP/config && echo \$TMP")
 
 echo $TMP_DIR > .tmp_dir
 
 scp $SAVE_PATH$SAVE_FILE $SERVER:$TMP_DIR/saves/
 
-scp player-data.json $SERVER:$TMP_DIR/
+scp server-settings.json $SERVER:$TMP_DIR/config/
 
 CONTAINER_NAME="factorio-$(uuidgen)"
 
