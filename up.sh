@@ -20,8 +20,8 @@ CONTAINER_NAME="factorio-$(uuidgen)"
 echo $CONTAINER_NAME > .container_name
 
 ssh -q $SERVER "bash -c 'docker run -d \
-  -p 34197:34197/udp \
-  -p 27015:27015/tcp \
+  -p $UDP_PORT:34197/udp \
+  -p $TCP_PORT:27015/tcp \
   -v $TMP_DIR:/factorio \
   --name $CONTAINER_NAME \
   --restart=unless-stopped \

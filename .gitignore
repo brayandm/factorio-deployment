@@ -1,3 +1,4 @@
 .env
 .tmp_dir
 .active
+.container_name
