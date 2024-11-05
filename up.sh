@@ -13,9 +13,9 @@ ROOT_DIR=$SERVER_STORAGE_DIR
 
 CONTAINER_NAME="factorio-$(uuidgen)"
 
-DIR="\$ROOT_DIR/\$CONTAINER_NAME"
+DIR="$ROOT_DIR$CONTAINER_NAME"
 
-TMP_DIR=$(ssh -q $SERVER "mkdir -p \$DIR/saves && mkdir -p \$DIR/config && echo \$DIR")
+TMP_DIR=$(ssh -q $SERVER "mkdir -p $DIR/saves && mkdir -p $DIR/config && echo $DIR")
 
 echo $TMP_DIR > .tmp_dir
 
