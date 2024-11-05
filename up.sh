@@ -28,7 +28,6 @@ echo $CONTAINER_NAME > .container_name
 ssh -q $SERVER "bash -c '
   sed -i \"s/\\\"game_password\\\": \\\"\\\"/\\\"game_password\\\": \\\"$GAMEPLAY_PASSWORD\\\"/\" $TMP_DIR/config/server-settings.json && \
   docker run -d \
-    -u $(id -u):$(id -g) \
     -p $UDP_PORT:34197/udp \
     -p $TCP_PORT:27015/tcp \
     -v $TMP_DIR:/factorio \
