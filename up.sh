@@ -9,15 +9,19 @@ touch .active
 
 source .env
 
-TMP_DIR=$(ssh -q $SERVER "TMP=\$(mktemp -d) && mkdir -p \$TMP/saves && mkdir -p \$TMP/config && echo \$TMP")
+ROOT_DIR="/etc/factorio"
+
+CONTAINER_NAME="factorio-$(uuidgen)"
+
+DIR="\$ROOT_DIR/\$CONTAINER_NAME"
+
+TMP_DIR=$(ssh -q $SERVER "mkdir -p \$DIR/saves && mkdir -p \$DIR/config && echo \$DIR")
 
 echo $TMP_DIR > .tmp_dir
 
 scp $SAVE_PATH$SAVE_FILE $SERVER:$TMP_DIR/saves/
 
 scp server-settings.json $SERVER:$TMP_DIR/config/
-
-CONTAINER_NAME="factorio-$(uuidgen)"
 
 echo $CONTAINER_NAME > .container_name
 
