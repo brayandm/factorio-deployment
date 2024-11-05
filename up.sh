@@ -9,7 +9,7 @@ touch .active
 
 source .env
 
-ROOT_DIR="/etc/factorio"
+ROOT_DIR=$SERVER_STORAGE_DIR
 
 CONTAINER_NAME="factorio-$(uuidgen)"
 
