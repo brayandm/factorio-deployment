@@ -13,7 +13,7 @@ TMP_DIR=$(cat .tmp_dir)
 
 CONTAINER_NAME=$(cat .container_name)
 
-ssh -q $SERVER "bash -c 'docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME && sudo rm -rf $TMP_DIR'"
+ssh -q $SERVER "bash -c 'docker stop $CONTAINER_NAME && docker rm $CONTAINER_NAME && rm -rf $TMP_DIR'"
 
 rm -f .tmp_dir
 
